@@ -68,7 +68,7 @@ namespace MeetingScheduler.Controllers
                 Email = attendantPost.Email
             };
             
-            if (meeting.Attendants.Count == 2)
+            if (meeting.Attendants.Count == 25)
             {
                 return BadRequest();
             }
