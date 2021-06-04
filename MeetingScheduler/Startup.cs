@@ -19,9 +19,10 @@ namespace MeetingScheduler
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt =>
-                                               opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<MeetingsContext>(opt =>
+                                               opt.UseInMemoryDatabase("MeetingList"));
             services.AddControllers();
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MeetingScheduler", Version = "v1" }); });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,6 +30,8 @@ namespace MeetingScheduler
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MeetingScheduler v1"));
             }
 
             app.UseHttpsRedirection();
